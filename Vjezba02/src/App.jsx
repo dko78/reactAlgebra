@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ListaKartica from "../componenets/ListaKartica";
 
 export default class App extends Component {
   constructor() {
@@ -9,8 +10,14 @@ export default class App extends Component {
     };
     */
     this.state = {
-      osobe: [{ ime: "Igor" }, { ime: "Maja" }, { ime: "Dabo" }],
+      
+      [],
+
     };
+  }
+
+  componentDidMount(){
+    fetch("https://reqres.in/api/users").then((res)=> console.log(res))
   }
   render() {
     /* return (
