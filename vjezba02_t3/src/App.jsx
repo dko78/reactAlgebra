@@ -53,12 +53,13 @@ export default class App extends Component {
     });
 
     return (
-      <>
+      <div className="app">
+        {/* statles komponenete koje služe samo za prikaz. oni dobivaju porpse od statefull komponenti tj .ova glavna App.jsx */}
         <SearchPolje onFilterChange={onFilterChange} />
         {/* koja glupist on filer change je destr. this */}
         <ListaKartica osobe={filter} />
         {/* Filter je u biti lista koje glupost kako se to naziva. to je definirano gore  const filter = osobe.filter((osoba) => {... */}
-      </>
+      </div>
     );
   }
 }
