@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import ListaKartica from "./components/ListaKartica";
+import SearchPolje from "./components/SearchPolje";
+
 //klasne komponenete
 export default class App extends Component {
   //construktor se prvi pokreće kad se incijalizirta početo stanje
@@ -6,66 +9,14 @@ export default class App extends Component {
   //pa componenet did mount
   constructor() {
     super();
-    // this.state = { ime: "Dalibor" };
-    /*
-    this.state = {
-      osobe: [
-        { ime: "Igor" },
-        { ime: "Maja" },
-        { ime: "Sanja" },
-        { ime: "Dalibor" },
-      ],
-    };
-    */ //liste
-    //fetch https://reqres.in/api/users, moeras lifecycle, kad se komponenta učita
+
     this.state = {
       osobe: [],
       searchPolje: "", //da mogu pristupiti u renderu od svugdje
     };
   }
 
-  /*render() {
-    
-    return (
-      <>
-        <p>Pozz {this.state.ime}</p>
-        <button
-          onClick={() => {
-            // this.setState({ ime: "Jura" }); // asinkr. funkcija.kod klasnog pristupa, mijenjamo vrijednos ovako
-            //tu je problem jer se na azurira sinkrona cl i asimh. setState pa trebaš callBack funkciju
-            this.setState(
-              () => {
-                return { ime: "Jura" };
-              }, //tu ide callback funckija
-              () => {
-                console.log(this.state.ime);
-              }
-            );
-          }}>
-          Promijen ime
-        </button>
-      </>
-    );
-  }
-  */
-  /*--ovo je za liste
-  render() {
-    return (
-      <>
-        <div>
-          {this.state.osobe.map((osoba) => {
-            return <p key={Math.random()}>{osoba.ime}</p>;
-          })}
-        </div>
-      </>
-    );
-  }
-  */
   componentDidMount() {
-    /* fetch("https://reqres.in/api/users").then((res) =>
-      res.json().then((data) => console.log(data))
-    );
-    */
     //sa setState
     fetch("https://reqres.in/api/users").then((res) =>
       res.json().then((data) =>
@@ -103,17 +54,10 @@ export default class App extends Component {
 
     return (
       <>
-        <input
-          type="search"
-          className="search-box"
-          placeholder="pretraži"
-          onChange={onFilterChange}
-        />
-        <div>
-          {filter.map((osoba) => {
-            return <p key={osoba.id}>{osoba.first_name}</p>;
-          })}
-        </div>
+        <SearchPolje onFilterChange={onFilterChange} />
+        {/* koja glupist on filer change je destr. this */}
+        <ListaKartica osobe={filter} />
+        {/* Filter je u biti lista koje glupost kako se to naziva. to je definirano gore  const filter = osobe.filter((osoba) => {... */}
       </>
     );
   }
