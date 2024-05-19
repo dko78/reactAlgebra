@@ -2,6 +2,9 @@ import HelloFn from "../components/HelloFn";
 import HelloCl from "../components/HelloCl";
 import Message from "../components/Message";
 import Counter from "../components/Counter";
+import ChageStateCl from "../components/ChageStateCl";
+import MessageCL from "../components/MessageCL";
+import CounterFn2 from "../components/CounterFn2";
 {
   /*ako hoces named import
 onda import {HelloFn} from ...
@@ -19,8 +22,12 @@ const App = () => {
         Učimo React. Ovo su Props childreni. Klase
       </HelloCl>
       <Message />
+      <MessageCL />
       <hr />
       <Counter />
+      <hr />
+      <CounterFn2 />
+      <ChageStateCl />
     </div>
   );
 };

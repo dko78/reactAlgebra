@@ -1,5 +1,6 @@
 import HelloFn from "./components/HelloFn";
 import HelloCl from "./components/HelloCl";
+import ChageStateCl from "./components/ChageStateCl";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <HelloCl ime="Ivan" prezime="Ivić">
         Učimo react, ovo su props childreni - CLase
       </HelloCl>
+      <ChageStateCl />
     </div>
   );
 };
