@@ -18,15 +18,21 @@ const App = () => {
   const theme1 = state.theme1;
 
   const [user, setUser] = useState({ name: "", city: "", age: 50 });
-  console.log(user);
+  console.log(user, "... svaki put kad render");
 
-  //isto ovo sa userom ali funckija, da se izvrši jenom a ne svaki put kad se renderira
-
+  /*
   const handleChange = (e) => {
     setUser((prevUser) => {
       return { ...prevUser, name: e.target.value };
     });
   };
+  */
+  const handleChange = (e) => {
+    setUser((prevUser) => {
+      return { ...prevUser, name: e.target.value };
+    });
+  };
+
   function decrementCount() {
     // ovako ne raditi nego preko funcije setCount(count - 1);
     setCount((prevCount) => {
