@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
-const App = () => {
-  const [windowWith, setWindowWith] = useState(window.innerWidth);
-
+const UseEffect = () => {
+  const [windowWith, setWindowwith] = useState(window.innerWidth);
   const [ime, setIme] = useState("");
 
   useEffect(() => {
@@ -10,30 +9,29 @@ const App = () => {
     window.addEventListener("resize", updateWindowWith);
   });
 
-  const updateWindowWith = () => {
-    setWindowWith(window.innerWidth);
-  };
-  /* use efekt moze samo 1 prilikom učitavanja mountanja komponenete
-  ono što je componenet didimounth u kalsnom
-*/
   useEffect(() => {
-    console.log("Učitavam se samo 1 kod mountanja");
-  }, []); //zato je [] ovo prazno
+    console.log("učitavam se samo prilikom mountanja stranice");
+  }, []);
 
-  /* kad se ime mijenja ime*/
+  //pokreće se prilikom učitavanja[] ili kad se vrijednost varijable promijeni
   useEffect(() => {
-    console.log(`ime je sad ${ime}`);
+    console.log(`Ime je sad ${ime}`);
   }, [ime]);
+
+  const updateWindowWith = () => {
+    setWindowwith(window.innerWidth);
+  };
+
+  return (
+    <>
+      <p>Širina prozora: {windowWith}</p>
+      <input
+        type="text"
+        value={ime}
+        onChange={(event) => setIme(event.target.value)}
+      />
+    </>
+  );
 };
 
-return (
-  <div>
-    <p>Širina prozora:{windowWith}</p>
-    <input
-      type="text"
-      value={ime}
-      onChange={(event) => setIme(event.target.value)}></input>
-  </div>
-);
-
-export default App;
+export default UseEffect;
