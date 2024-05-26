@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Form from "./Components/Form";
-import TodoList from "./Components/Todo";
+import TodoList from "./Components/TodoList";
 
 const App = () => {
   const [inputText, setInputText] = useState("");
