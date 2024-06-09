@@ -9,7 +9,7 @@ const App = () => {
 
   function handleSumbit(e) {
     e.preventDefault();
-
+    //kad mijenjaš vrijednosti, radiš sa previopus moraš u funckiju stavciti
     setTodos((currentTodos) => {
       return [
         ...currentTodos,
