@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./styles.css";
 import NewTodoForm from "./components/NewTodoForm";
 import { TodoList } from "./components/TodoList";
@@ -7,7 +7,18 @@ const App = () => {
   //vrijednost varijable new item mijenjaš samo funkcijom setNewitem
   //a kad e okida...dvaki put kad upišeš nešto u input.id = item, zato treabš i event handler, on
   //const [newItem, setNewItem] = useState("");
-  const [todos, setTodos] = useState([]);
+  // ovo ti radi kad ne spremaš u lokalniStoragr
+  //const [todos, setTodos] = useState([]);
+
+  const [todos, setTodos] = useState(() => {
+    const localValue = localStorage.getItem("ITEMS");
+    if (localValue == null) return [];
+    return JSON.parse(localValue);
+  });
+
+  useEffect(() => {
+    localStorage.setItem("ITEMS", JSON.stringify(todos));
+  }, [todos]);
 
   function addTodo(title) {
     setTodos((currentTodos) => {
