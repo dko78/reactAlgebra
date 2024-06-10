@@ -7,6 +7,7 @@ export const GithubProvider = ({ children }) => {
   const initialState = {
     users: [],
     user: {},
+    repos: [],
     loading: false,
   };
 
@@ -41,6 +42,15 @@ export const GithubProvider = ({ children }) => {
     });
   };
 
+  const getRepos = async () => {
+    const res = await fetch(`https://api.github.com/users/${login}/repos`);
+    const data = await res.json();
+    dispatch({
+      type: "GET_REPOS",
+      data: data,
+    });
+  };
+
   const clearUsers = () => {
     dispatch({
       txpe: "CLEAR_USERS",
@@ -54,7 +64,9 @@ export const GithubProvider = ({ children }) => {
         loading: state.loading,
         fetchUsers,
         clearUsers,
+        repos: state.repos,
         getUser,
+        getRepos,
       }}>
       {children}
     </GithubContext.Provider>
