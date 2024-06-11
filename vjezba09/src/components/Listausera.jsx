@@ -6,8 +6,6 @@ const Listausera = ({ podaci }) => {
   return <div>{filterUsers}</div>;
 };
 
-//moraš definirati varijablu međuvarijablui
-
-const SearchUsers = HOC(Listausera, "users");
+const SearchUsers = HOC(Listausera, "users"); //definiramo međuvarijabla
 
 export default SearchUsers;
