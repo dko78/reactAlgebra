@@ -28,7 +28,7 @@ const HOC = (komponenta, ekstenzija) => {
 
         if (ekstenzija === "posts") {
           const { title } = podatak;
-          return title.toLowerCase().indexOf(uput.toLowerCase()) >= 0;
+          return title.toLowerCase().indexOf(upit.toLowerCase()) >= 0;
         }
         return true;
       });

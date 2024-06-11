@@ -9,6 +9,5 @@ const Listausera = ({ podaci }) => {
 //moraš definirati varijablu međuvarijablui
 
 const SearchUsers = HOC(Listausera, "users");
-//export default Listausera;
 
 export default SearchUsers;
