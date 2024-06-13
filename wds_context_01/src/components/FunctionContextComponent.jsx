@@ -1,17 +1,23 @@
 import React, { useContext } from "react";
 
-import { ThemeContext } from "../App";
+import { useTheme, useThemeUpdate } from "./ThemeContext";
 
 const FunctionContextComponent = () => {
-  const darkTheme = useContext(ThemeContext); //bitno da useContext napraviš
+  const darkTheme = useTheme(); //bitno da useContext napraviš
+  const toggleTheme = useThemeUpdate();
   const themeStyles = {
-    backgrounColor: darkTheme ? "#333" : "#CCC",
+    background: darkTheme ? "#333" : "#CCC",
     color: darkTheme ? "#CCC" : "#333",
     padding: "3rem",
     margin: "2rem",
   };
 
-  return <div style={themeStyles}> Function Theme</div>;
+  return (
+    <>
+      <button onClick={toggleTheme}>Toggle theme</button>
+      <div style={themeStyles}> Function Theme</div>
+    </>
+  );
 };
 
 export default FunctionContextComponent;
