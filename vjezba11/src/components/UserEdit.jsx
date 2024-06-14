@@ -1,10 +1,17 @@
 import { useState } from "react";
 import Button from "../shared/Button";
 import TextInput from "../shared/TextInput";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { editUser } from "../redux/UserSlice";
 
 const UserEdit = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const params = useParams();
+  const users = useSelector((store) => store.users);
+  const selectedUser = users.filter((user) => user.id === params.id);
+  const { ime, email } = selectedUser[0]; //lista ali objekt
   const [podaci, setPodaci] = useState({
     ime: "",
     email: "",
@@ -14,6 +21,13 @@ const UserEdit = () => {
     console.log(podaci);
     setPodaci({ ime: "", email: "" });
     navigate("/");
+    dispatch(
+      editUser({
+        id: podaci.id,
+        ime: podaci.ime,
+        email: podaci.email,
+      })
+    );
   };
 
   return (
