@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 
+//https://www.emailjs.com/docs/sdk/installation/
+//https://www.emailjs.com/docs/examples/reactjs/
+
 const App = () => {
   const initialValues = { user: " ", email: "", pass: "" };
   const [formErrors, setFormErrors] = useState({});
