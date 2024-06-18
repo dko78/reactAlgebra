@@ -10,6 +10,8 @@ const App = () => {
   const [formValues, setFormValues] = useState(initialValues);
   const [isSubmit, setIsSubmit] = useState(false);
 
+  const form = useRef();
+
   //jedna handle change funckija za sva 3!!!!
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,22 +19,33 @@ const App = () => {
     console.log(formValues);
   };
 
+  const handleFormReset = () => {
+    setFormErrors({});
+    setFormValues(initialValues);
+    setIsSubmit(true);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
-    emailjs
-      .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", form.current, {
-        publicKey: "YOUR_PUBLIC_KEY",
-      })
-      .then(
-        () => {
-          console.log("SUCCESS!");
-        },
-        (error) => {
-          console.log("FAILED...", error.text);
-        }
-      );
+
+    if (Object.keys(validate(formValues)).length === 0) {
+      emailjs
+        .sendForm("service_w2ykqfb", "template_3zj2baa", form.current, {
+          publicKey: "j7ChY6RZm789qrlly",
+        })
+        .then(
+          (result) => {
+            console.log(result.text);
+            console.log("SUCCESS!");
+            handleFormReset();
+          },
+          (error) => {
+            console.log("FAILED...", error.text);
+          }
+        );
+    }
   };
 
   useEffect(() => {
@@ -64,8 +77,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <form onSubmit={handleSubmit}>
-        {/* kako ovo */}
+      <form ref={form} onSubmit={handleSubmit}>
         <h1>Forma</h1>
         {Object.keys(formErrors).length === 0 && isSubmit ? (
           <p className="ispis">Uspjeh</p>
@@ -73,20 +85,20 @@ const App = () => {
           <p className="ispis">Ispunite formu</p>
         )}
         <hr />
-        <div className="from">
+        <div className="form">
           <div className="field">
             <label htmlFor="user">Username</label>
             <input
               type="text"
               name="user"
-              placeholder="UserName"
+              placeholder="Username"
               value={formValues.user}
               onChange={handleChange}
             />
           </div>
           <p>{formErrors.user}</p>
           <div className="field">
-            <label htmlFor="email">E-mail</label>
+            <label htmlFor="email">Email</label>
             <input
               type="text"
               name="email"
@@ -97,10 +109,10 @@ const App = () => {
           </div>
           <p>{formErrors.email}</p>
           <div className="field">
-            <label htmlFor="pass">Pass</label>
+            <label htmlFor="pass">Password</label>
             <input
               type="password"
-              name="pas"
+              name="pass"
               placeholder="Password"
               value={formValues.pass}
               onChange={handleChange}
