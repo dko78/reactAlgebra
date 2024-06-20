@@ -6,17 +6,11 @@ import { deleteUser } from "../redux/UserSlice";
 
 const UserList = () => {
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.users);
+  const users = useSelector((store) => store.users);
   const removeUser = (id) => {
     dispatch(deleteUser({ id }));
   };
-  /*
-  const users = [
-    { id: "1", ime: "Ivan", email: "ivan@example.com.hr" },
-    { id: "2", ime: "Stjepan", email: "stjepan@example.com.hr" },
-    { id: "3", ime: "Maja", email: "maja@example.com.hr" },
-  ];
-*/
+
   const userList = () =>
     users.map((user) => (
       <div key={user.id}>
@@ -28,7 +22,7 @@ const UserList = () => {
           <Link to={`edit-user/${user.id}`}>
             <FaEdit />
           </Link>
-          <FaRegTrashAlt ocClick={() => removeUser(user.id)} />
+          <FaRegTrashAlt onClick={() => removeUser(user.id)} />
         </div>
       </div>
     ));

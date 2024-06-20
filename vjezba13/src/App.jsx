@@ -17,23 +17,9 @@ const App = () => {
 
   return (
     <div>
-      {page === 1 && (
-        <PrviKorak
-          page={page}
-          setPage={setPage}
-          data={data}
-          setDate={setData}
-        />
-      )}
-      {page === 2 && (
-        <DrugiKorak
-          page={page}
-          setPage={setPage}
-          data={data}
-          setDate={setData}
-        />
-      )}
-      {page === 3 && <TreciKorak data={data} />}
+      {page === 1 && <PrviKorak page={page} setPage={setPage} data={data} setData={setData} />}
+      {page === 2 && <DrugiKorak page={page} setPage={setPage} data={data} setData={setData} />}
+      {page === 3 && <TreciKorak page={page} setPage={setPage} data={data} />}
       {page === 4 && <CetvrtiKorak />}
     </div>
   );

@@ -7,13 +7,12 @@ const UserSlice = createSlice({
     { id: "2", ime: "Stjepan", email: "stjepan@example.com.hr" },
     { id: "3", ime: "Maja", email: "maja@example.com.hr" },
   ],
-  //ima state i akciju
+
   reducers: {
     addUser: (state, action) => {
       state.push(action.payload);
     },
     editUser: (state, action) => {
-      //sa payloadom dolazi
       const { id, ime, email } = action.payload;
       const selectedUser = state.find((user) => user.id === id);
       if (selectedUser) {

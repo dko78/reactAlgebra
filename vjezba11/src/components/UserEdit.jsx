@@ -11,10 +11,10 @@ const UserEdit = () => {
   const params = useParams();
   const users = useSelector((store) => store.users);
   const selectedUser = users.filter((user) => user.id === params.id);
-  const { ime, email } = selectedUser[0]; //lista ali objekt
+  const { ime, email } = selectedUser[0];
   const [podaci, setPodaci] = useState({
-    ime: "",
-    email: "",
+    ime,
+    email,
   });
 
   const handleEditUser = () => {
@@ -23,7 +23,7 @@ const UserEdit = () => {
     navigate("/");
     dispatch(
       editUser({
-        id: podaci.id,
+        id: params.id,
         ime: podaci.ime,
         email: podaci.email,
       })

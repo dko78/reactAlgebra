@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { addUser } from "../redux/UserSlice";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+
 const UserAdd = () => {
   const navigate = useNavigate();
-  const useDispatch = useDispatch();
+  const dispatch = useDispatch();
   const [podaci, setPodaci] = useState({
     ime: "",
     email: "",
