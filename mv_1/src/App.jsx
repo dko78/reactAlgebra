@@ -13,13 +13,6 @@ const App = () => {
     setNewItem("");
   }
 
-  function toggleTodo(id) {
-    console.log(id);
-    setTodos((currentTodos) => {
-      const filterTodo = currentTodos.filter((todo) => todo.id === id);
-    });
-  }
-
   const handleDelete = (todoSelected) => {
     alert(todoSelected.id);
     const filterTodo = todos.filter((todo) => todo.id !== todoSelected.id);
