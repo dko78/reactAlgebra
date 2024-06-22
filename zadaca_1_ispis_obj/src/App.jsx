@@ -1,29 +1,28 @@
 import { useEffect, useState } from "react";
-import dataImena from "./Data/imena.json";
-
+//vjezba, šitanej iz lokalnog jsona i prikaz
+//pazi json mora biti u public
 const App = () => {
-  const [imena, setImena] = useState([]);
-
-  //const [osobe, setOsobe] = useState([]);
-
-  /*  useEffect(() => {
-    fetch(dataImena)
-      .then((res) => res.json())
-      .then((data) => setImena(data.data));
-  }, []);
-  //console.log(imena);
+  const [osobe, setOsobe] = useState([]);
 
   useEffect(() => {
-    fetch("https://reqres.in/api/users")
+    fetch("./osobe.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
       .then((res) => res.json())
-      .then((data) => setOsobe(data.data));
+      .then((data) => {
+        setOsobe(data);
+      });
   }, []);
- */
+
   return (
     <>
       <h1>Imena iz lokalni json file </h1>
+
       <div>
-        {dataImena.map((osoba) => {
+        {osobe.map((osoba) => {
           return (
             <div key={crypto.randomUUID()}>
               <p>
