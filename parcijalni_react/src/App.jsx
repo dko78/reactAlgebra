@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import RepozitoriList from "./components/RepozitoriList";
-import { RiH1 } from "react-icons/ri";
+import ResetForm from "./components/ResetForm";
 
 const App = () => {
   const [userSearchName, setUserSearchName] = useState("");
@@ -81,8 +81,14 @@ const App = () => {
         </div>
         {display && <h2> REPOSITORIES</h2>}
         <RepozitoriList repos={repos} />
-        {repos.length > 0 && <button onClick={handleReset}>RESET</button>}
-        {/*  {display && console.log("repos.length " + repos.length)} */}
+        {repos.length > 0 && (
+          <ResetForm
+            setData={setData}
+            setRepos={setRepos}
+            setUserSearchName={setUserSearchName}
+            setDisplay={setDisplay}
+          />
+        )}
       </div>
     </>
   );
