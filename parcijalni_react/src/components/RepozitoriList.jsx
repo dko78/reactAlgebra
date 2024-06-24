@@ -1,14 +1,14 @@
-const RepozitoriList = (props) => {
-  const repos = props.repos;
-
+const RepozitoriList = ({ repos }) => {
   return (
-    <div className="repos-list">
-      {repos.map((repo) => (
-        <div key={repo.id}>
-          <p>{repo.name}</p>
-        </div>
-      ))}
-    </div>
+    <>
+      <div className="repos-list">
+        {repos.map((repo) => (
+          <div key={repo.id}>
+            <p>{repo.name}</p>
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 

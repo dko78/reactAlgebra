@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import RepozitoriList from "./components/RepozitoriList";
+import { RiH1 } from "react-icons/ri";
 
 const App = () => {
   const [userSearchName, setUserSearchName] = useState("");
@@ -8,9 +9,9 @@ const App = () => {
   const [location, setLocation] = useState("");
   const [bio, setBio] = useState("");
   const [idUser, setIdUser] = useState("");
-  const [idRepo, setIdRepo] = useState("");
-  const [repoName, setRepoName] = useState("");
+  const [error, setError] = useState("");
   const [repos, setRepos] = useState([]);
+  const [display, setDisplay] = useState(false);
 
   const handleSearch = (e) => {
     setUserSearchName(e.target.value.toLowerCase());
@@ -18,20 +19,20 @@ const App = () => {
 
   const handleSearcUser = (e) => {
     e.preventDefault();
+    setDisplay(true);
     console.log(`https://api.github.com/users/${userSearchName}`);
     fetch(`https://api.github.com/users/${userSearchName}`)
       .then((res) => res.json())
-      .then((data) => setData(data));
+      .then((data) => {
+        if (data.message) {
+          setError(data.message);
+        } else {
+          setData(data);
+        }
+      });
 
     showRepos();
     setUserSearchName("");
-  };
-
-  const setRepoData2 = (repos) => {
-    repos.map((repo) => {
-      console.log(repo.id, repo.name);
-      //return <div key={repo.id}>{repo.name}</div>;
-    });
   };
 
   const showRepos = () => {
@@ -59,21 +60,21 @@ const App = () => {
             id="user"
             placeholder="e.g. facebook"
             value={userSearchName}
-            onChange={handleSearch} //(e) => setUserSearchName(e.target.value)
+            onChange={handleSearch}
           />
         </div>
-        <div>
-          <button>GO!</button>
-        </div>
+        <button>GO!</button>
       </form>
-
-      <div key={idUser}>
-        <img src={avatar_url} alt={name} />
-        {name}
-        {location}
-        {bio}
+      <div>
+        <div key={idUser}>
+          <img src={avatar_url} alt={name} className="img" />
+          <p>{name}</p>
+          <p>{bio}</p>
+          <p>{location}</p>
+        </div>
+        {display && <h2> REPOSITORIES</h2>}
+        <RepozitoriList repos={repos} />
       </div>
-      <RepozitoriList repos={repos} />
     </>
   );
 };
