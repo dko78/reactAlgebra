@@ -50,6 +50,13 @@ const App = () => {
     setBio(bio);
   };
 
+  const handleReset = () => {
+    setData({});
+    setRepos([]);
+    setUserSearchName("");
+    setDisplay(false);
+  };
+
   return (
     <>
       <form onSubmit={handleSearcUser}>
@@ -74,6 +81,8 @@ const App = () => {
         </div>
         {display && <h2> REPOSITORIES</h2>}
         <RepozitoriList repos={repos} />
+        {repos.length > 0 && <button onClick={handleReset}>RESET</button>}
+        {/*  {display && console.log("repos.length " + repos.length)} */}
       </div>
     </>
   );
