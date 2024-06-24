@@ -10,6 +10,7 @@ const App = () => {
   const [idUser, setIdUser] = useState("");
   const [idRepo, setIdRepo] = useState("");
   const [repoName, setRepoName] = useState("");
+  const [repos, setRepos] = useState([]);
 
   const handleSearch = (e) => {
     setUserSearchName(e.target.value.toLowerCase());
@@ -26,7 +27,7 @@ const App = () => {
     setUserSearchName("");
   };
 
-  const setRepoData = (repos) => {
+  const setRepoData2 = (repos) => {
     repos.map((repo) => {
       console.log(repo.id, repo.name);
       //return <div key={repo.id}>{repo.name}</div>;
@@ -37,7 +38,7 @@ const App = () => {
     console.log(`https://api.github.com/users/${userSearchName}/repos`);
     fetch(`https://api.github.com/users/${userSearchName}/repos`)
       .then((res) => res.json())
-      .then((data) => setRepoData(data)); //console.log(data)
+      .then((data) => setRepos(data)); //console.log(data)setRepoData(data))
   };
 
   const setData = ({ id, avatar_url, name, location, bio }) => {
@@ -72,7 +73,7 @@ const App = () => {
         {location}
         {bio}
       </div>
-      <RepozitoriList showRepos={showRepos} />
+      <RepozitoriList repos={repos} />
     </>
   );
 };
