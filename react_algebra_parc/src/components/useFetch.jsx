@@ -19,6 +19,7 @@ const useFetch = (url) => {
       .catch((err) => {
         setLoading(false);
         setError(err.message);
+        setData(null);
       });
   }, [url]);
   return { data, loading, error };
