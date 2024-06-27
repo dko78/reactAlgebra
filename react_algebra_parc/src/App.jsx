@@ -1,40 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import useFetch from "./components/useFetch";
 
 const App = () => {
-  /* const [gitUser, setGitUser] = useState(null);
-  const [repositories, setRepositories] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false); */
-  const {
-    data: gitUser,
-    loading,
-    error,
-  } = useFetch(`https://api.github.com/users/dko78`);
+  const [searchUser, setSearchUser] = useState("");
+  const [urlUser, setUrlUser] = useState("");
+  const [urlRepos, setUrlRepos] = useState("");
 
-  const {
-    data: repos,
-    loadingRepos,
-    errorRepos,
-  } = useFetch(`https://api.github.com/users/dko78/repos`);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userInput = searchUser.toLowerCase();
+    if (userInput) {
+      setUrlUser(`https://api.github.com/users/${userInput}`);
+      setUrlRepos(`https://api.github.com/users/${userInput}/repos`);
+    }
+    setSearchUser("");
+  };
+
+  const { data: gitUser, loading, error } = useFetch(urlUser);
+
+  const { data: repos, loadingRepos, errorRepos } = useFetch(urlRepos);
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="user">GitHub username:</label>
         <div>
           <input
+            required
             type="text"
             id="user"
             placeholder="e.g. facebook"
-            //value={userSearchName}
-            //onChange={handleSearch}
+            value={searchUser}
+            onChange={(e) => setSearchUser(e.target.value)}
           />
         </div>
         <button>GO!</button>
       </form>
       <hr />
-      {error && <div>{error}</div>}
+      {!urlUser && <div>Upišite usera</div>}
+      {error && <div>ovo je iz err {error}</div>}
       {loading && <div>Učitavam...</div>}
       {gitUser && (
         <div key={gitUser.id}>
